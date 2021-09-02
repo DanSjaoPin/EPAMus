@@ -1,3 +1,3 @@
 # EPAMus
 
-Labs by Dymar Daniil.
+Labs by Pepe the Danya.
