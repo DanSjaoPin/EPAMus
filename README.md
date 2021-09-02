@@ -1,3 +1,3 @@
 # EPAMus
 
-Labs by Pepe the Danya.
+Labs by Danya the Pepe.
