@@ -3,6 +3,7 @@ using System;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using System.Threading;
+using System.Drawing;
 
 namespace NUnitTestProject1
 {
@@ -17,9 +18,8 @@ namespace NUnitTestProject1
         public void Setup()
         {
             _driver = new FirefoxDriver();
-            //_driver = new EdgeDriver("D:\\WebDriver\\MicrosoftWebDriver.exe");
 
-            _driver.Manage().Window.Maximize();
+            _driver.Manage().Window.Size = new Size(1920, 1080);
 
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
             _driver.Navigate().GoToUrl("https://whitebit.com/ru/auth/login");
@@ -34,7 +34,7 @@ namespace NUnitTestProject1
         [Test]
         public void NegaviveInputValueMustTransformToPositive()
         {
-            Thread.Sleep(20000);//Нужно для ввода капчи, ну шо поделац
+            Thread.Sleep(20000);//ГЌГіГ¦Г­Г® Г¤Г«Гї ГўГўГ®Г¤Г  ГЄГ ГЇГ·ГЁ, Г­Гі ГёГ® ГЇГ®Г¤ГҐГ«Г Г¶
 
             var demoCoins = _driver.FindElement(By.CssSelector("div.MarketTabs__tab:nth-child(4)"));
             demoCoins.Click();
