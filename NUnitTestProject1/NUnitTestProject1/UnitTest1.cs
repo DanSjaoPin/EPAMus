@@ -12,7 +12,7 @@ namespace NUnitTestProject1
         private IWebDriver _driver;
         private const string Email = "dymar02@mail.ru";
         private const string Password = "TestPassword!23";
-        private const string actualInputValue = "1";
+        private const string expectedInputValue = "1";
 
         [SetUp]
         public void Setup()
@@ -51,9 +51,9 @@ namespace NUnitTestProject1
             inputBar.Click();
             inputBar.SendKeys("-1");
 
-            String expectedInputValue = inputBar.GetAttribute("value");
+            String actualInputValue = inputBar.GetAttribute("value");
 
-            Assert.AreEqual(expectedInputValue, actualInputValue);
+            Assert.AreEqual(actualInputValue, expectedInputValue);
         }
 
         [TearDown]
