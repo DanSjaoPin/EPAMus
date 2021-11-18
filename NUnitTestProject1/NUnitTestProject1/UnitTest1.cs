@@ -17,6 +17,9 @@ namespace NUnitTestProject1
         [SetUp]
         public void Setup()
         {
+            FirefoxOptions options = new FirefoxOptions();
+            options.AddArguments("--window-size=1920,1200");
+            
             _driver = new FirefoxDriver();
 
             _driver.Manage().Window.Size = new Size(1920, 1080);
