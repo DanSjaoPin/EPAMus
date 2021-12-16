@@ -25,6 +25,8 @@ namespace Lab9PageObject
         private string[] actualInputValueBalance = new string[4] { "54.11", "135.29", "270.58", "541.16" };
 
         MainPage mainPage;
+        SimpleTraiding simpleTraiding;
+        ProfessionalTraiding professionalTraiding;
 
         [SetUp]
         public void Setup()
@@ -42,10 +44,6 @@ namespace Lab9PageObject
             mainPage.InputPassword(Password);
             mainPage.SubmitAuthorization();
             Thread.Sleep(20000); //Capcha
-
-            mainPage.SubmitNotifications();
-            mainPage.SubmitKYC();
-            mainPage.SubmitCookies();
            
         }
     
@@ -53,8 +51,14 @@ namespace Lab9PageObject
         [Test]
         public void InputNegativeCost()
         {
-            mainPage.ChooseDEMO();
-            mainPage.ChooseDemoBirja();
+            simpleTraiding = new SimpleTraiding(driver);
+
+            simpleTraiding.SubmitNotifications();
+            simpleTraiding.SubmitKYC();
+            simpleTraiding.SubmitCookies();
+
+            simpleTraiding.ChooseDEMO();
+            simpleTraiding.ChooseDemoBirja();
             //mainPage.InputSumm(testInputValue);
 
             //String expectedInputValue = mainPage.GetInputedSumm();
@@ -63,9 +67,9 @@ namespace Lab9PageObject
 
             for(int i = 0; i < testInputValue.Length; i++)
             {
-                mainPage.InputSumm(testInputValue[i]);               
+                simpleTraiding.InputSumm(testInputValue[i]);               
 
-                String expectedInputValue = mainPage.GetInputedSumm();
+                String expectedInputValue = simpleTraiding.GetInputedSumm();
 
                 Assert.AreEqual(expectedInputValue, actualInputValue[i]);
             }
@@ -75,30 +79,34 @@ namespace Lab9PageObject
         [Test]
         public void InputOrdersForPercentOfBalance()
         {
+            professionalTraiding = new ProfessionalTraiding(driver);
+
             driver.Navigate().GoToUrl("https://whitebit.com/ru/trade-pro/BTC-USDT?type=spot");
 
-            mainPage.OpenCurrenyList();
-            mainPage.ChooseDemoMarket();
-            mainPage.ChooseDemoBirjaProf();
+            professionalTraiding.OpenCurrenyList();
+            professionalTraiding.ChooseDemoMarket();
+            professionalTraiding.ChooseDemoBirjaProf();
 
-            mainPage.ChoosePercent10();
-            String expectedInputValue = mainPage.GetInputedSummProf();
+            professionalTraiding.SubmitCookies();
+
+            professionalTraiding.ChoosePercent10();
+            String expectedInputValue = professionalTraiding.GetInputedSummProf();
 
             Assert.AreEqual(expectedInputValue, actualInputValueBalance[0]);
 
-            mainPage.ChoosePercent25();
-            expectedInputValue = mainPage.GetInputedSummProf();
+            professionalTraiding.ChoosePercent25();
+            expectedInputValue = professionalTraiding.GetInputedSummProf();
 
             Assert.AreEqual(expectedInputValue, actualInputValueBalance[1]);
 
 
-            mainPage.ChoosePercent50();
-            expectedInputValue = mainPage.GetInputedSummProf();
+            professionalTraiding.ChoosePercent50();
+            expectedInputValue = professionalTraiding.GetInputedSummProf();
 
             Assert.AreEqual(expectedInputValue, actualInputValueBalance[2]);
 
-            mainPage.ChoosePercentMAX();
-            expectedInputValue = mainPage.GetInputedSummProf();
+            professionalTraiding.ChoosePercentMAX();
+            expectedInputValue = professionalTraiding.GetInputedSummProf();
 
             Assert.AreEqual(expectedInputValue, actualInputValueBalance[3]);
 
